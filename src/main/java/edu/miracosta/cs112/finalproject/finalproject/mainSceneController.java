@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
 public class mainSceneController {
 
     @FXML
-    Label stringPlayerHP = new Label("Player HP:");
+    Label stringPlayerHP = new Label("Player.java HP:");
     @FXML
     Label stringEnemyHP = new Label("Enemy HP:");
     @FXML
@@ -22,7 +22,7 @@ public class mainSceneController {
     Label valueMP = new Label();
 
     @FXML
-    ImageView enemyImage = new ImageView();
+    ImageView enemyImage = new ImageView("file:.src/main/resources/edu/miracosta/cs112/finalproject/finalproject/enemy.png");
     @FXML
     Button attackButton = new Button();
     @FXML

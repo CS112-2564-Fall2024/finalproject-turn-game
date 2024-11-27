@@ -21,6 +21,8 @@ package edu.miracosta.cs112.finalproject.finalproject;
          this.attackStat = attackStat;
 
     }
+    public abstract int magic(int HP);
+    public abstract int getMP();
 
 
 }
