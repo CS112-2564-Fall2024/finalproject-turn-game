@@ -1,6 +1,7 @@
 package edu.miracosta.cs112.finalproject.finalproject;
 
 public class Game {
+    //model class. Core class.
     static Player player = new Player();
     static Enemy enemy = new Enemy();
 

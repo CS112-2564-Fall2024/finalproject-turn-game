@@ -28,5 +28,5 @@ public class magicSceneController {
     public void handleLose(){
         Game.getPlayer().setHP(Game.getPlayer().magi.handleMagic(4));
     }
-
+    //TODO: once any method is run, transition to enemy attack.
 }
