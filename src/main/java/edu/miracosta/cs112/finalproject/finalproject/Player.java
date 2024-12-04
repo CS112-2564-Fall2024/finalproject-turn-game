@@ -13,18 +13,22 @@ public class Player extends gameCharacter{
             if (MP > 0) {
                 if (choice == 1) {
                     System.out.println("FIRE");
+                    MP -= 30;
                     return 20;
                 }
                 if (choice == 2) {
                     System.out.println("ATTACK UP");
+                    MP -= 20;
                     return 10;
                 }
                 if (choice == 3) {
                     System.out.println("HEAL");
+                    MP -= 10;
                     return 20;
                 }
                 if (choice == 4) {
                     System.out.println("LOSE");
+                    MP -= 10;
                     return -1000;
                 }
 

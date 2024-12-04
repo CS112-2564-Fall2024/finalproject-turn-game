@@ -1,5 +1,6 @@
 package edu.miracosta.cs112.finalproject.finalproject;
 
+import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,10 +11,12 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
 
 public class mainSceneController {
-
+    //start by initilizing all variables.
+    //Anything that has "value" in the name will be changed overtime.
     @FXML
     Label stringPlayerHP = new Label("Player.java HP:");
     @FXML
@@ -29,57 +32,95 @@ public class mainSceneController {
     Label valueMP = new Label();
     Image enemyIm = new Image("file:./src/main/java/resources/enemy.jpg");
     @FXML
-    ImageView enemyImage = new ImageView(enemyIm);
+    ImageView enemyImage = new ImageView();
 
     @FXML
     Button attackButton = new Button();
     @FXML
     Button magicButton = new Button();
 
+
+    //Each time the scene is loaded, the user needs to see how the enemy's HP, how the player's HP, and how the player's mana has changed.
+    public void initialize() throws IOException {
+        valuePlayerHP.setText(" " + Game.getPlayer().getHP());
+        valueMP.setText(" " + Game.getPlayer().getMP());
+        valueEnemyHP.setText(" " + Game.getEnemy().getHP());
+        //this sets the image. Rather jank, I dislike it, but it's pretty much the fastest way to update the image.
+        //Ima will hold the URL of the image.
+        URL Ima = mainApplication.class.getResource("/edu/miracosta/cs112/finalproject/finalproject/enemy.png");
+        System.out.println("Image URL: " + Ima);
+        //Have to remind the program that the Ima is not null.
+        //Ima then gives the URL to enemyImage, allowing the ImageView to properly display the image.
+        assert Ima != null;
+        enemyImage.setImage(new Image(Ima.toString()));
+    }
     @FXML
+            // if the player clicks on the magic button, this method is run.
     private void magicScene() throws IOException {
-        System.out.println("AWAAAGGGGAAA WBBHAHBAHBA");
-        //alpha stuff
+        //checkCondition will check to see if the player's or the enemy's HP is zero, then transition to the proper scenes.
+        //Funnily enough, this can be used in initilize.
+        checkCondition();
+
+        //checks the MP value of Player.
+        //MP is used as a "currency" for magic. the player can decrease their MP value, and in exchange, use "spells" that will affect Player and Enemy values, and change the User experience.
         if(Game.getPlayer().getMP() > 0){
-            Game.getPlayer().setAttackStat(Game.getPlayer().getAttackStat() +5);
-            Game.getPlayer().setMP(Game.getPlayer().getMP() -10);
-            System.out.println("YA MP: " + Game.getPlayer().getHP());
-            System.out.println("ATTACK UP");
-            System.out.println("ENEM<Y ATTACKD");
-            Game.getPlayer().setHP(Game.getPlayer().getHP()-Game.getEnemy().attackStat);
-            System.out.println("YOUR HP" + Game.getPlayer().getHP());
+            FXMLLoader fxmlLoader = new FXMLLoader(mainApplication.class.getResource("magicScene.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = (Stage) magicButton.getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("MAGIC");
+            stage.show();
         }
         else{
             System.out.println("NOT ENOGUH MAIGCO POITMNS");
             playerAttack();
         }
-        //end alpha stuff
 
-        //TODO: transition to magic scene here.
-        FXMLLoader fxmlLoader = new FXMLLoader(mainApplication.class.getResource("magicScene.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = (Stage) magicButton.getScene().getWindow();
-        stage.setScene(scene);
-        stage.setTitle("MAGIC");
-        stage.show();
-        //this transitions to the magic scene proper :D
     }
     @FXML
-    private void playerAttack(){
+    //this is run if the player presses the attack button.
+    private void playerAttack() throws IOException {
+        //checkCondition will check to see if the player's or the enemy's HP is zero, then transition to the proper scenes.
+        //Funnily enough, this can be used in initilize.
+        checkCondition();
+        //this changes the HP variable of the Enemy object. Enemy HP is decreased by the Player's attackStat.
         Game.getEnemy().setHP(Game.getEnemy().getHP() - Game.getPlayer().getAttackStat());
-        System.out.println("AAATAACKKOOOOO");
-        System.out.println("Enemy HP: " + Game.getEnemy().getHP());
-        if(Game.getEnemy().getHP() <= 0){
-            //TODO: transition to victoryScene
+        //Afterwords, transition to the enemyAttackScene.
+        FXMLLoader fxmlLoader = new FXMLLoader(mainApplication.class.getResource("enemyAttackScene.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = (Stage) enemyImage.getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("ENEMY ATTACK");
+        stage.show();
+    }
+    //each time the magicScene or playerAttack method is run, checkCondition method is run.
+    //this checks for two conditons in this order: if the Enemy's HP is zero or below, or if the Player's HP is zero.
+    //the reason for this order is to provide favor for the player.
+
+    public void checkCondition() throws IOException {
+        //if the Enemy's HP is zero, then transition to the win screen.
+        if (Game.getEnemy().getHP() <= 0) {
             System.out.println("YOU WIN SMARTFACE");
             //break(0);
+            FXMLLoader fxmlLoader = new FXMLLoader(mainApplication.class.getResource("winScene.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = (Stage) stringPlayerHP.getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("WIN");
+            stage.show();
         }
-        //this is alpha stuff.
-        System.out.println("ENEMY ATTACK YOU NOW");
-        Game.getPlayer().setHP(Game.getPlayer().getHP()-Game.getEnemy().attackStat);
-        System.out.println("YO HP IS NOW: " + Game.getPlayer().getHP());
-        //TODO: transition to enemyAttackScene method call here.
+        //if the Player's HP is zero, then transition to the lose screen.
+        if (Game.getPlayer().getHP() <= 0) {
+            System.out.println("YOU SUCK, LOSE");
+            FXMLLoader fxmlLoader = new FXMLLoader(mainApplication.class.getResource("loseScene.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = (Stage) stringPlayerHP.getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("LOSE");
+            stage.show();
+
+        }
     }
 
-    //TODO: enemyAttackScene transition here.
+
 }

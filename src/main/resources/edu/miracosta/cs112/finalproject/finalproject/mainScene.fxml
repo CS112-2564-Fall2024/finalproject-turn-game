@@ -39,6 +39,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.image.Image?>
 <VBox fx:controller="edu.miracosta.cs112.finalproject.finalproject.mainSceneController" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="343.0">
@@ -52,12 +53,13 @@
                </children>
             </Pane>
             <Label id="stringPlayerMP" layoutX="653.0" layoutY="83.0" text="Player MP:" />
-            <Label id="valueMP" layoutX="735.0" layoutY="83.0" text="int MP" />
+            <Label fx:id="valueMP" layoutX="735.0" layoutY="83.0" text="int MP" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <ImageView fx:id="enemyImage" fitHeight="263.0" fitWidth="237.0" layoutX="302.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="enemyImage" fitHeight="263.0" fitWidth="237.0" layoutX="302.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
