@@ -53,10 +53,11 @@ public class mainSceneController {
         //Ima then gives the URL to enemyImage, allowing the ImageView to properly display the image.
         assert Ima != null;
         enemyImage.setImage(new Image(Ima.toString()));
+
     }
     @FXML
             // if the player clicks on the magic button, this method is run.
-    private void magicScene() throws IOException {
+    private void magicScene() throws IOException, wrongSceneException {
         //checkCondition will check to see if the player's or the enemy's HP is zero, then transition to the proper scenes.
         //Funnily enough, this can be used in initilize.
         checkCondition();
@@ -70,6 +71,7 @@ public class mainSceneController {
             stage.setScene(scene);
             stage.setTitle("MAGIC");
             stage.show();
+
         }
         else{
             System.out.println("NOT ENOGUH MAIGCO POITMNS");
@@ -79,7 +81,7 @@ public class mainSceneController {
     }
     @FXML
     //this is run if the player presses the attack button.
-    private void playerAttack() throws IOException {
+    private void playerAttack() throws IOException, wrongSceneException {
         //checkCondition will check to see if the player's or the enemy's HP is zero, then transition to the proper scenes.
         //Funnily enough, this can be used in initilize.
         checkCondition();
@@ -92,12 +94,13 @@ public class mainSceneController {
         stage.setScene(scene);
         stage.setTitle("ENEMY ATTACK");
         stage.show();
+
     }
     //each time the magicScene or playerAttack method is run, checkCondition method is run.
     //this checks for two conditons in this order: if the Enemy's HP is zero or below, or if the Player's HP is zero.
     //the reason for this order is to provide favor for the player.
 
-    public void checkCondition() throws IOException {
+    public void checkCondition() throws wrongSceneException, IOException {
         //if the Enemy's HP is zero, then transition to the win screen.
         if (Game.getEnemy().getHP() <= 0) {
             System.out.println("YOU WIN SMARTFACE");
@@ -108,9 +111,17 @@ public class mainSceneController {
             stage.setScene(scene);
             stage.setTitle("WIN");
             stage.show();
+            stage.setMaximized(false);
+            stage.setMaximized(true);
+
         }
         //if the Player's HP is zero, then transition to the lose screen.
         if (Game.getPlayer().getHP() <= 0) {
+            if(Game.getEnemy().getHP() <= 0){
+                //custom exception.
+                //The enemy object having zero HP SHOULD be prioritized.
+                throw new wrongSceneException("Should be win screen");
+            }
             System.out.println("YOU SUCK, LOSE");
             FXMLLoader fxmlLoader = new FXMLLoader(mainApplication.class.getResource("loseScene.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
@@ -118,6 +129,8 @@ public class mainSceneController {
             stage.setScene(scene);
             stage.setTitle("LOSE");
             stage.show();
+            stage.setMaximized(false);
+            stage.setMaximized(true);
 
         }
     }

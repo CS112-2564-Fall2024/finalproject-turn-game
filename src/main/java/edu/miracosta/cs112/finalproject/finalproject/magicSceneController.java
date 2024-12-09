@@ -46,6 +46,7 @@ public class magicSceneController {
         stage.setScene(scene);
         stage.setTitle("ENEMY ATTACK");
         stage.show();
+
     }
 }
 

@@ -43,7 +43,7 @@
          <children>
             <Label fx:id="youLose" layoutX="422.0" layoutY="40.0" text="YOU LOSE" />
             <Label fx:id="youSuck" layoutX="422.0" layoutY="526.0" text="YOU SUCK" />
-            <ImageView fx:id="loseImage" fitHeight="449.0" fitWidth="490.0" layoutX="212.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="loseImage" fitHeight="800.0" fitWidth="900.0" layoutX="212.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
    </children>

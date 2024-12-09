@@ -17,7 +17,7 @@ public class winController {
 
     public void initialize(){
 
-        URL Imo = mainApplication.class.getResource("/edu/miracosta/cs112/finalproject/finalproject/enemyAttacj.jpg");
+        URL Imo = mainApplication.class.getResource("/edu/miracosta/cs112/finalproject/finalproject/winImage.png");
         System.out.println("Image URL: " + Imo);
         assert Imo != null;
         winImage.setImage(new Image(Imo.toString()));
