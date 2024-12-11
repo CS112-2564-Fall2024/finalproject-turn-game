@@ -1,0 +1,11 @@
+made by Beau Nicholas.
+Turn Game
+Turn Game is a turn-based combat game, inspired by games like Final Fantasy or Pokemon.
+The objective is to make the enemy's HP 0 before your HP hits zero, and encourage startegy.
+For example: simply mashing attack will lead to a loss.
+So, the player can use spells to modifiy their stats.
+A player could use fire to deal more damage, increase their attack damage, or heal themself.
+So, a player could use fire magic and then attack to win, or boost their attack to defeat the enemy, allowing for multiple strategies and creative methods.
+GIF: https://s4.ezgif.com/tmp/ezgif-4-406fd4d9a3.gif
+UML Diagram from UD1: https://drive.google.com/file/d/1WOJsZPr7hk_SMNVKJbPJxcpkZ8d9Vsx9/view?usp=sharing
+GUI Wireframe Diagram from UD2: https://drive.google.com/file/d/1pwTPNpmN9k5E-qgPksu8Y11ODZR8g-IZ/view?usp=sharing
